@@ -2,34 +2,35 @@
 import re
 class RubyFormatter:
     outdentExp = [
-        "^rescue\b", 
-        "^ensure\b",
-        "^elsif\b",
-        "^end\b",
-        "^else\b",
-        "\bwhen\b",
-        "^[^\{]*\}",
-        "^[^\[]*\]"]
+        re.compile(r"^rescue\b"), 
+        re.compile(r"^ensure\b"),
+        re.compile(r"^elsif\b"),
+        re.compile(r"^end\b"),
+        re.compile(r"^else\b"),
+        re.compile(r"\bwhen\b"),
+        re.compile(r"\{[^\}]*$"),
+        re.compile(r"^[^\[]*\]")]
+
     indentExp = [
-        "^module\b",
-        "^class\b",
-        "^if\b",
-        "(=\s*|^)until\b",
-        "(=\s*|^)for\b",
-        "^unless\b",
-        "(=\s*|^)while\b",
-        "(=\s*|^)begin\b",
-        "(^| )case\b",
-        "\bthen\b",
-        "^rescue\b",
-        "^def\b",
-        "\bdo\b",
-        "^else\b",
-        "^elsif\b",
-        "^ensure\b",
-        "\bwhen\b",
-        "\{[^\}]*$",
-        "\[[^\]]*$"]
+        re.compile(r"^module\b"),
+        re.compile(r"^class\b"),
+        re.compile(r"^if\b"),
+        re.compile(r"(=\s*|^)until\b"),
+        re.compile(r"(=\s*|^)for\b"),
+        re.compile(r"^unless\b"),
+        re.compile(r"(=\s*|^)while\b"),
+        re.compile(r"(=\s*|^)begin\b"),
+        re.compile(r"(^| )case\b"),
+        re.compile(r"\bthen\b"),
+        re.compile(r"^rescue\b"),
+        re.compile(r"^def\b"),
+        re.compile(r"\bdo\b"),
+        re.compile(r"^else\b"),
+        re.compile(r"^elsif\b"),
+        re.compile(r"^ensure\b"),
+        re.compile(r"\bwhen\b"),
+        re.compile(r"\{[^\}]*$"),
+        re.compile(r"\[[^\]]*$")]
     def __init__(self, file_string):
         self.file_string = file_string
 
@@ -96,7 +97,8 @@ class RubyFormatter:
                     tline = re.sub("\\\"","'", tline)
                     
                     for oe in RubyFormatter.outdentExp:
-                        if re.match(oe, tline):
+                        if oe.match(tline):
+                            print "outdent matched!!!!!!!!!!!"
                             tab -= 1
                             break
                 if len(multiLine_array) > 0:
@@ -108,8 +110,12 @@ class RubyFormatter:
                     output.append(self.rb_add_line(line, tab))
 
                 if not comment_line:
+                    print "trying to match %s" %(tline)
+
+                    endExp = re.compile(r"\s+end\s*$")
                     for ire in RubyFormatter.indentExp:
-                        if re.search(ire, tline) and not re.search("\s+end\s*$", tline):
+                        if ire.search(tline) and not endExp.search(tline):
+                            print "indent matched!!!!!!!!!!!"
                             tab += 1
                             break
             if re.match("=end", tline):
@@ -118,6 +124,6 @@ class RubyFormatter:
         if error:
             print "Error: indent/outdent mismatch: %d" %(tab)
         
-        return ', '.join(output) + "\n" #, error
+        return '\n'.join(output) + "\n" #, error
                  
                
