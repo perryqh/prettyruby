@@ -1,3 +1,7 @@
 Ruby code formatter written in Python for Sublime Text
 
-Influenced by http://www.arachnoid.com/ruby/rbeautify.rb.txt
+Installation:
+1) Place prettyruby.py in ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/User/
+2) Bind a key to "pretty_ruby". I did this by changing the "build" key in "Default (OSX).sublime-keymap".
+
+{ "keys": ["super+b"], "command": "pretty_ruby" },
