@@ -11,6 +11,7 @@ class PrettyRubyCommand(sublime_plugin.TextCommand):
 		view.replace(edit, region, beautified) 
 
 
+# port from http://neontology.com/2006/05/10/beautiful-ruby-in-textmate
 class RubyFormatter:
     outdentExp = [
         re.compile(r"^rescue\b"), 
@@ -95,13 +96,13 @@ class RubyFormatter:
                      in_here_doc = len(here_doc_term) > 0
             
             if comment_block or program_end or in_here_doc:
-                #add the line unchanged
                 output.append(line)
             else:
                 comment_line = re.match("^#", tline)
                 if not comment_line:
-                    #throw out sequences that lead to confusion
-                    #todo
+                    # throw out sequences that lead to confusion
+                    # todo
+            
                     # delete end-of-line comments
                     tline = re.sub(r"#[^\"]+$","", tline)
                     # convert quotes
@@ -131,5 +132,5 @@ class RubyFormatter:
         if error:
             print "Error: indent/outdent mismatch: %d" %(tab)
         
-        return '\n'.join(output) + "\n" #, error
+        return '\n'.join(output) + "\n"
 

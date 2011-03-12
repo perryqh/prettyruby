@@ -1,4 +1,4 @@
-Ruby code formatter written in Python for Sublime Text
+Ruby code formatter written in Python for Sublime Text. This is pretty much a straight port of port from http://neontology.com/2006/05/10/beautiful-ruby-in-textmate
 
 Installation:
 1) Place prettyruby.py in ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/User/
