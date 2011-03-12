@@ -103,9 +103,9 @@ class RubyFormatter:
                     #throw out sequences that lead to confusion
                     #todo
                     # delete end-of-line comments
-                    tline = re.sub("#[^\"]+$","", tline)
+                    tline = re.sub(r"#[^\"]+$","", tline)
                     # convert quotes
-                    tline = re.sub("\\\"","'", tline)
+                    tline = re.sub(r"\\\"","'", tline)
                     
                     for oe in RubyFormatter.outdentExp:
                         if oe.match(tline):
