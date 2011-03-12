@@ -100,9 +100,6 @@ class RubyFormatter:
             else:
                 comment_line = re.match("^#", tline)
                 if not comment_line:
-                    # throw out sequences that lead to confusion
-                    # todo
-            
                     # delete end-of-line comments
                     tline = re.sub(r"#[^\"]+$","", tline)
                     # convert quotes
