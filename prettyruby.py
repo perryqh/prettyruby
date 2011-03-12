@@ -19,7 +19,7 @@ class RubyFormatter:
         re.compile(r"^end\b"),
         re.compile(r"^else\b"),
         re.compile(r"\bwhen\b"),
-        re.compile(r"\{[^\}]*$"),
+        re.compile(r"^[^\{]*\}"),
         re.compile(r"^[^\[]*\]")]
 
     indentExp = [
