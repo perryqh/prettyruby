@@ -51,7 +51,7 @@ class RubyFormatter:
     
 
     def rb_make_tab(self, tab):
-        return "" if tab < 0 else " " * 3 * tab
+        return "" if tab < 0 else " " * 2 * tab
     
     def rb_add_line(self, line, tab):
         line = line.rstrip().lstrip()
